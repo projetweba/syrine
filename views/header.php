@@ -113,7 +113,7 @@
                                             <a href="my-account.html">my account</a>
                                         </li>
                                         <li>
-                                            <a href="login-register.html">login / register</a>
+                                            <a href="login.php">login / register</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -149,9 +149,32 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="header-login same-style">
-                            <a href="login-register.html"><i class="icon-user icons"></i></a>
-                        </div>
+
+
+                        <?php if (isset($_SESSION["connectedUsername"])) {
+                            ?>
+                            <div class="header-login same-style">
+                                <a href="#"><i><?php if (isset($_SESSION["connectedUsername"])) echo $_SESSION["connectedUsername"] ?></i></a>
+                            </div>
+
+                        <?php
+                    } else {
+                        ?>
+                            <div class="header-login same-style" >
+                                <a href="login.php"><i class="icon-user icons"></i></a>
+                            </div>
+                        <?php
+
+                    }
+
+
+                    ?>
+
+
+
+
+
+
                         <div class="header-cart same-style">
 
                         </div>
