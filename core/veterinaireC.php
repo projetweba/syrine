@@ -64,6 +64,8 @@ try{
 	$description=$veterinaire->getDescription();
 	$city=$veterinaire->getCity();
 	$adresse=$veterinaire->getAdresse();
+	$datas = array( ':id'=>$id, ':nom'=>$nom, ':prenom'=>$prenom, ':image'=>$image, ':description'=>$description, ':city'=>$city, ':adresse'=>$adresse);
+	$req->bindValue(':id',$id);
 	$req->bindValue(':nom',$nom);
 	$req->bindValue(':prenom',$prenom);
 	$req->bindValue(':image',$image);
@@ -76,7 +78,9 @@ try{
 			
         }
         catch (Exception $e){
-            echo " Erreur ! ".$e->getMessage();
+			echo " Erreur ! ".$e->getMessage();
+			echo " Les datas : " ;
+			print_r($datas);
         }
 }
 
@@ -92,6 +96,16 @@ try{
             die("Erreur : " .$e->getMessage());
         }
     }
-
+	function recupererVeterinaire($id){
+		$sql="SELECT * from veterinaire where id=$id";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
 }
 ?>

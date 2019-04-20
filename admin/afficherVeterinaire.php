@@ -319,8 +319,8 @@ Frank Handrics
 <td class="text-dark text-semibold">Id</td>
 <td class="text-dark text-semibold">Nom</td>
 <td class="text-dark text-semibold">Prenom</td>
-<td class="text-dark text-semibold">ville</td>
-<td class="text-dark text-semibold">adresse</td>
+<td class="text-dark text-semibold">Ville</td>
+<td class="text-dark text-semibold">Adresse</td>
 <td class="text-dark text-semibold">Action</td>
 </tr>
 </thead>
@@ -338,7 +338,7 @@ foreach($listeveterinaires as $row){
 <div class="btn-group dropdown">
 <a href="javascript: void(0);" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="lni-more-alt"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="#"><i class="lni-pencil mr-2 text-muted"></i>Edit Contact</a>
+<a class="dropdown-item" href="modifierVeterinaire.php?id=<?PHP echo $row['id']; ?>"><i class="lni-pencil mr-2 text-muted"></i>Edit Contact</a>
 <form method="POST" action="supprimerVeterinaire.php">
 <a class="dropdown-item" ><i class="lni-trash " >
 	<input class="btn-outline-danger mr-2 text-muted" type="submit" name="supprimer" value="Remove"></i>
