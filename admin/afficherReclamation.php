@@ -340,6 +340,7 @@
                                                         <th>SUBJECT</th>
                                                         <th>MESSAGE</th>
                                                         <th>STATUS</th>
+                                                        <th>ACTION</th>
                                                     </tr>
                                                 </thead>
                                                 <?PHP
@@ -372,9 +373,51 @@
 
                                                                 ?>
                                                             </td>
+                                                            <td>
+                                                                <?PHP
+                                                                if ($row['statut'] == 0) {
+                                                                    echo '<button class="btn btn-primary"  data-toggle="modal" data-target="#senMailModal'.$row[0].'"> Traiter</button>';
+                                                                }
+                                                                ?>
+                                                            </td>
                                                         </tr>
 
                                                     </tbody>
+
+
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="senMailModal<?php echo $row[0] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Traiter la reclamation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="post" action="traiterReclamation.php">
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleFormControlTextarea1">Email body</label>
+                                                                            <textarea class="form-control" id="exampleFormControlTextarea1" name="mail_body" rows="3"></textarea>
+                                                                        </div>
+                                                                        <input type="hidden" value="<?php echo $row[2] ?>" name="mail_to" />
+                                                                        <input type="hidden" value="<?php echo $row[0] ?>" name="id_reclamation" />
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        <input type="submit" class="btn btn-primary" value="Send mail" />
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Modal -->
+
+
+
                                                 <?PHP
                                             }
                                             ?>
@@ -385,6 +428,9 @@
                             </div>
                         </div>
                     </div>
+
+
+
 
 
                     <footer class="content-footer">

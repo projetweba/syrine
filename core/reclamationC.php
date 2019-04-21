@@ -121,6 +121,26 @@ class reclamationC
 		}
 	}
 
+	function traiterReclamationierreclamation($id)
+	{
+		$sql = "UPDATE reclamation SET statut=1 WHERE id=:id";
+
+		$db = config::getConnexion();
+		//$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
+		try {
+			$req = $db->prepare($sql);
+
+			$req->bindValue(':id', $id);
+
+			$s = $req->execute();
+
+			// header('Location: index.php');
+		} catch (Exception $e) {
+			echo " Erreur ! " . $e->getMessage();
+			echo " Les datas : ";
+		}
+	}
+
 
 
 
