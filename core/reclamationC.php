@@ -97,6 +97,18 @@ class reclamationC
 		}
 	}
 
+	function rechercheReclamation($key)
+	{
+		$sql = "SELECT * FROM reclamation WHERE fullNameC LIKE '%$key%' OR email LIKE '%$key%' OR subject LIKE '%$key%' OR message LIKE '%$key%'";
+		$db = config::getConnexion();
+		try {
+			$liste = $db->query($sql);
+			return $liste;
+		} catch (Exception $e) {
+			die('Erreur: ' . $e->getMessage());
+		}
+	}
+
 
 
 
