@@ -44,83 +44,12 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="mega-menu-position"><a href="shop-page.html">Food</a>
-                                    <ul class="mega-menu">
-                                        <li>
-                                            <ul>
-                                                <li class="mega-menu-title">Dogs Food</li>
-                                                <li><a href="shop-page.html">Eggs</a></li>
-                                                <li><a href="shop-page.html">Carrots</a></li>
-                                                <li><a href="shop-page.html">Salmon fishs</a></li>
-                                                <li><a href="shop-page.html">Peanut Butter</a></li>
-                                                <li><a href="shop-page.html">Grapes & Raisins</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul>
-                                                <li class="mega-menu-title">Cats Food</li>
-                                                <li><a href="shop-page.html">Meat</a></li>
-                                                <li><a href="shop-page.html">Fish</a></li>
-                                                <li><a href="shop-page.html">Eggs</a></li>
-                                                <li><a href="shop-page.html">Veggies</a></li>
-                                                <li><a href="shop-page.html">Cheese</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul>
-                                                <li class="mega-menu-title">Fishs Food</li>
-                                                <li><a href="shop-page.html">Rice</a></li>
-                                                <li><a href="shop-page.html">Veggies</a></li>
-                                                <li><a href="shop-page.html">Cheese</a></li>
-                                                <li><a href="shop-page.html">wheat bran</a></li>
-                                                <li><a href="shop-page.html">Cultivation</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul>
-                                                <li><a href="shop-page.html"><img alt="" src="assets/img/banner/menu-img-4.jpg"></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">PAGES</a>
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="about-us.html">about us</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-page.html">shop page</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-list.html">shop list</a>
-                                        </li>
-                                        <li>
-                                            <a href="product-details.html">product details</a>
-                                        </li>
-                                        <li>
-                                            <a href="cart.html">cart page</a>
-                                        </li>
-                                        <li>
-                                            <a href="checkout.html">checkout</a>
-                                        </li>
-                                        <li>
-                                            <a href="wishlist.html">wishlist</a>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html">contact us</a>
-                                        </li>
-                                        <li>
-                                            <a href="my-account.html">my account</a>
-                                        </li>
-                                        <li>
-                                            <a href="login.php">login / register</a>
-                                        </li>
-                                    </ul>
-                                </li>
+
+
                                 <li><a href="blog-leftsidebar.html">Reclamation</a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="ajouterReclamation.html">Ajouter reclamation</a>
+                                            <a href="ajouterReclamation.php">Ajouter reclamation</a>
                                         </li>
                                         <li>
                                             <a href="afficherReclamation.php">Mes reclamation</a>
@@ -129,6 +58,16 @@
                                 </li>
                                 <li><a href="about-us.html">ABOUT</a></li>
                                 <li><a href="contact.html">contact us</a></li>
+                                <?php
+                                if (isset($_SESSION["connectedUsername"])) {
+                                    ?>
+                                    <li><a href="logout.php">Logout</a></li>
+                                <?php
+                            } else {
+                                ?>
+
+                                <?php  } ?>
+
                             </ul>
                         </nav>
                     </div>
@@ -154,13 +93,13 @@
                         <?php if (isset($_SESSION["connectedUsername"])) {
                             ?>
                             <div class="header-login same-style">
-                                <a href="#"><i><?php if (isset($_SESSION["connectedUsername"])) echo $_SESSION["connectedUsername"] ?></i></a>
+                                <a href="profile.php"><i style="font-size: 15px"><?php if (isset($_SESSION["connectedUsername"])) echo $_SESSION["connectedUsername"] ?></i></a>
                             </div>
 
                         <?php
                     } else {
                         ?>
-                            <div class="header-login same-style" >
+                            <div class="header-login same-style">
                                 <a href="login.php"><i class="icon-user icons"></i></a>
                             </div>
                         <?php

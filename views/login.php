@@ -18,6 +18,10 @@ session_start();
         var_dump($_SESSION["connectedUsername"]);
     if (isset($_SESSION["connectedUserId"]))
         var_dump($_SESSION["connectedUserId"]);
+
+    if (isset($_SESSION["connectedUsername"]))
+        header('Location:  afficherReclamation.php');
+
     include('header.php');
     ?>
 

@@ -4,7 +4,7 @@ class reclamationC
 {
 	function ajouterReclamation($reclamation)
 	{
-		$sql = "INSERT INTO reclamation (fullNameC,email,subject,message,statut) values (:fullNameC, :email, :subject, :message, :statut) ";
+		$sql = "INSERT INTO reclamation (fullNameC,email,subject,message,statut,id_user,id_produit) values (:fullNameC, :email, :subject, :message, :statut, :idUser, :idProduit) ";
 		$db = config::getConnexion();
 		try {
 			$req = $db->prepare($sql);
@@ -19,6 +19,8 @@ class reclamationC
 			$req->bindValue(':subject', $subject);
 			$req->bindValue(':message', $message);
 			$req->bindValue(':statut', $statut);
+			$req->bindValue(':idUser', $reclamation->idUser);
+			$req->bindValue(':idProduit',  $reclamation->idProduit);
 			$req->execute();
 		} catch (Exception $e) {
 			echo 'erreur: ' . $e->getMessage();
