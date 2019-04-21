@@ -19,7 +19,6 @@ class userC
 
     function login($username, $password)
     {
-        $isValid = false;
         $toConnectUser = null;
 
         $db = config::getConnexion();
@@ -34,6 +33,7 @@ class userC
             foreach ($liste as $row) {
                 $user = new user($row['username'], $row['email'], $row['password']);
                 $user->setId($row['id']);
+                $user->role = ($row['role']);
                 array_push($arrayUsers, $user);
             }
             if (count($arrayUsers) > 0) {

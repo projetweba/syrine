@@ -5,6 +5,7 @@ class user
     private $username;
     private $email;
     private $password;
+    public $role;
 
     function __construct($username, $email, $password)
     {
