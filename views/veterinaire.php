@@ -59,7 +59,14 @@ session_start();
                             <div class="col-lg-6 col-md-12">
                                 <div class="blog-wrapper mb-30 gray-bg">
                                     <div class="blog-img hover-effect">
-                                        <a href="blog-details.html"><img alt="" src=" <?PHP echo $row['image']; ?>" style="height: 300px"></a>
+                                        <a href="#" onclick="displayModal(
+                                                    '<?PHP echo $row[1]; ?>',
+                                                    '<?PHP echo $row[2]; ?>',
+                                                    '<?PHP echo $row[3]; ?>',
+                                                    '<?PHP echo $row[5]; ?>',
+                                                    '<?PHP echo $row[6]; ?>',
+                                                          '<?PHP echo $row[4]; ?>'
+                                                    )"><img alt="" src=" <?PHP echo $row['image']; ?>" style="height: 300px"></a>
                                     </div>
                                     <div class="blog-content">
                                         <div class="blog-meta">
@@ -138,7 +145,7 @@ session_start();
                         } else {
                             ?>
                                 <li>
-                                    <a href="veterinaire.php?page=<?php echo $openedPage+2 ?>"><i class="icon-arrow-right"></i></a>
+                                    <a href="veterinaire.php?page=<?php echo $openedPage + 2 ?>"><i class="icon-arrow-right"></i></a>
                                 </li>
                             <?php
                         }
@@ -282,9 +289,61 @@ session_start();
         </div>
     </div>
 
+
+
+    <!-- Button trigger modal -->
+    <button type="button" id="btn_modal" class="btn btn-primary" style="display: none" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Details veterinaire</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <img id="img_modal" src="#" style="width:100%; height: 300px" />
+                        </div>
+                        <div class="col-6">
+                            <h2 id="name_modal">new shop collection our shop</h2>
+                            <blockquote class="importent-title">
+                                <h5 id="address_modal">city - address</h5>
+                            </blockquote>
+                            <p id="desc_modal">desc</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php
     include('footer.php');
     ?>
+
+
+    <script>
+        function displayModal(nom, prenom, urlImage, city, address, desc) {
+            $('#name_modal').html(nom + " " + prenom);
+            $('#address_modal').html(city + " - " + address);
+            $('#desc_modal').html(desc);
+            $('#img_modal').attr("src", urlImage);
+            $('#btn_modal').click();
+        }
+    </script>
 </body>
 
 
