@@ -56,7 +56,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="about-us.html">ABOUT</a></li>
+                                <li><a href="veterinaire.php">Veterinaire</a></li>
                                 <li><a href="contact.html">contact us</a></li>
                                 <?php
                                 if (isset($_SESSION["connectedUsername"])) {

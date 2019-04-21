@@ -34,7 +34,7 @@ session_start();
     <?PHP
     include '../core/reclamationC.php';
     $reclamation1C = new reclamationC();
-    $listeReclamations = $reclamation1C->afficherReclamation();
+    $listeReclamations = $reclamation1C->afficherMesReclamation($_SESSION['connectedUserId']);
 
     ?>
 
