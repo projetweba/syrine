@@ -4,7 +4,7 @@ class veterinaireC
 {
 	function ajouterVeterinaire($veterinaire)
 	{
-		$sql = "INSERT INTO veterinaire (nom,prenom,image,description,city,adresse) values (:nom, :prenom, :image, :description, :city, :adresse) ";
+		$sql = "INSERT INTO veterinaire (nom,prenom,image,description,city,adresse,latitude,longitude) values (:nom, :prenom, :image, :description, :city, :adresse, :latitude, :longitude) ";
 		$db = config::getConnexion();
 		try {
 			$req = $db->prepare($sql);
@@ -21,6 +21,8 @@ class veterinaireC
 			$req->bindValue(':description', $description);
 			$req->bindValue(':city', $city);
 			$req->bindValue(':adresse', $adresse);
+			$req->bindValue(':latitude', $veterinaire->latitude);
+			$req->bindValue(':longitude', $veterinaire->longitude);
 			$req->execute();
 		} catch (Exception $e) {
 			echo 'erreur: ' . $e->getMessage();
@@ -114,6 +116,18 @@ class veterinaireC
 		else
 			$offset = $page * $limit;
 		$sql = "SELECT * FROM veterinaire ORDER BY dateCreation DESC LIMIT $limit OFFSET $offset";
+		$db = config::getConnexion();
+		try {
+			$liste = $db->query($sql);
+			return $liste;
+		} catch (Exception $e) {
+			die('Erreur: ' . $e->getMessage());
+		}
+	}
+
+	function getVeterinaireByCity($city)
+	{
+		$sql = "SELECT * FROM veterinaire WHERE city='$city'";
 		$db = config::getConnexion();
 		try {
 			$liste = $db->query($sql);

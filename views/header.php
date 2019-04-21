@@ -46,7 +46,7 @@
                                 </li>
 
 
-                                <li><a href="blog-leftsidebar.html">Reclamation</a>
+                                <li><a href="#">Reclamation</a>
                                     <ul class="submenu">
                                         <li>
                                             <a href="ajouterReclamation.php">Ajouter reclamation</a>
@@ -56,7 +56,9 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="veterinaire.php">Veterinaire</a></li>
+                                <li><a href="veterinaire.php">Veterinaire</a>
+                                   
+                                </li>
                                 <li><a href="contact.html">contact us</a></li>
                                 <?php
                                 if (isset($_SESSION["connectedUsername"])) {

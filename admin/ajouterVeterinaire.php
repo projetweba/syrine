@@ -23,6 +23,8 @@ if (isset($_POST['nom']) and isset($_POST['prenom'])   and isset($_POST['descrip
 	}
 
 	$veterinaire1->setImage("http://localhost/zanimo/uploads/" . $_FILES["image"]["name"]);
+	$veterinaire1->latitude = $_POST['lat'];
+	$veterinaire1->longitude = $_POST['lng'];
 
 	$veterinaire1C = new veterinaireC();
 	$veterinaire1C->ajouterVeterinaire($veterinaire1);

@@ -7,6 +7,9 @@ class veterinaire{
     private $description;
     private $city;
     private $adresse;
+
+    public $latitude;
+    public $longitude;
     function __construct($nom,$prenom,$image,$description,$city,$adresse){
         $this->nom=$nom;
         $this->prenom=$prenom;

@@ -43,6 +43,10 @@ session_start();
         $listeveterinaires = $veterinaire1C->paginateVeterinaire($_GET['page'] - 1);
     else
         $listeveterinaires = $veterinaire1C->paginateVeterinaire(0);
+
+    if (isset($_GET['city']))
+        $listeveterinaires = $veterinaire1C->getVeterinaireByCity($_GET['city']);
+
     $nums = $veterinaire1C->getCountVeterinaires();
 
     ?>
@@ -51,22 +55,24 @@ session_start();
         <div class="container">
             <div class="row flex-row-reverse">
                 <div class="col-lg-9 col-md-8">
-                    <div class="row">
+                    <div class="row" id="veterinaire_container">
 
                         <?PHP
                         foreach ($listeveterinaires as $row) {
                             ?>
-                            <div class="col-lg-6 col-md-12">
+                            <div class="col-lg-6 col-md-12" id="veterinaire_content">
                                 <div class="blog-wrapper mb-30 gray-bg">
                                     <div class="blog-img hover-effect">
                                         <a href="#" onclick="displayModal(
-                                                    '<?PHP echo $row[1]; ?>',
-                                                    '<?PHP echo $row[2]; ?>',
-                                                    '<?PHP echo $row[3]; ?>',
-                                                    '<?PHP echo $row[5]; ?>',
-                                                    '<?PHP echo $row[6]; ?>',
-                                                          '<?PHP echo $row[4]; ?>'
-                                                    )"><img alt="" src=" <?PHP echo $row['image']; ?>" style="height: 300px"></a>
+                                                                                '<?PHP echo $row[1]; ?>',
+                                                                                '<?PHP echo $row[2]; ?>',
+                                                                                '<?PHP echo $row[3]; ?>',
+                                                                                '<?PHP echo $row[5]; ?>',
+                                                                                '<?PHP echo $row[6]; ?>',
+                                                                                '<?PHP echo $row[4]; ?>',
+                                                                                '<?PHP echo $row[8]; ?>',
+                                                                                '<?PHP echo $row[9]; ?>'
+                                                                                )"><img alt="" src=" <?PHP echo $row['image']; ?>" style="height: 300px"></a>
                                     </div>
                                     <div class="blog-content">
                                         <div class="blog-meta">
@@ -186,71 +192,29 @@ session_start();
                             <h4 class="shop-sidebar-title">Search Products</h4>
                             <div class="shop-search mt-25 mb-50">
                                 <form class="shop-search-form">
-                                    <input type="text" placeholder="Find a product">
+                                    <input type="text" placeholder="Find a product" id="search_input_vet">
                                     <button type="submit">
                                         <i class="icon-magnifier"></i>
                                     </button>
                                 </form>
                             </div>
                         </div>
+
+
                         <div class="shop-widget mt-50">
-                            <h4 class="shop-sidebar-title">Food Category </h4>
+                            <h4 class="shop-sidebar-title">City </h4>
                             <div class="shop-list-style mt-20">
                                 <ul>
-                                    <li><a href="#">Canned Food</a></li>
-                                    <li><a href="#">Dry Food</a></li>
-                                    <li><a href="#">Food Pouches</a></li>
-                                    <li><a href="#">Food Toppers</a></li>
-                                    <li><a href="#">Fresh Food</a></li>
-                                    <li><a href="#">Frozen Food</a></li>
+                                    <li><a href="veterinaire.php?city=Ariana">Ariana </a></li>
+                                    <li><a href="veterinaire.php?city=Béja">Béja </a></li>
+                                    <li><a href="veterinaire.php?city=Ben Arous">Ben Arous </a></li>
+                                    <li><a href="veterinaire.php?city=Bizerte">Bizerte </a></li>
+                                    <li><a href="veterinaire.php?city=Monastir">Monastir </a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="shop-widget mt-50">
-                            <h4 class="shop-sidebar-title">Top Brands </h4>
-                            <div class="shop-list-style mt-20">
-                                <ul>
-                                    <li><a href="#">Authority</a></li>
-                                    <li><a href="#">AvoDerm Natural</a></li>
-                                    <li><a href="#">Bil-Jac</a></li>
-                                    <li><a href="#">Blue Buffalo</a></li>
-                                    <li><a href="#">Castor & Pollux</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="shop-widget mt-50">
-                            <h4 class="shop-sidebar-title">Tags </h4>
-                            <div class="shop-list-style mt-20">
-                                <ul>
-                                    <li><a href="#">Food </a></li>
-                                    <li><a href="#">Fish </a></li>
-                                    <li><a href="#">Dog </a></li>
-                                    <li><a href="#">Cat </a></li>
-                                    <li><a href="#">Pet </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="shop-widget mt-50">
-                            <h4 class="shop-sidebar-title">Health Consideration </h4>
-                            <div class="shop-list-style mt-20">
-                                <ul>
-                                    <li><a href="#">Bone Development <span>18</span></a></li>
-                                    <li><a href="#">Digestive Care <span>22</span></a></li>
-                                    <li><a href="#">General Health <span>19</span></a></li>
-                                    <li><a href="#">Hip & Joint <span>41</span></a></li>
-                                    <li><a href="#">Immune System <span>22</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="shop-widget mt-50">
-                            <h4 class="shop-sidebar-title">Nutritional Option </h4>
-                            <div class="shop-list-style mt-20">
-                                <ul>
-                                    <li><a href="#">Grain Free <span>18</span></a></li>
-                                    <li><a href="#">Natural <span>22</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
+
+
                         <div class="shop-widget mt-50">
                             <h4 class="shop-sidebar-title">Recent Post</h4>
                             <div class="recent-post-wrapper mt-25">
@@ -317,14 +281,15 @@ session_start();
                                 <h5 id="address_modal">city - address</h5>
                             </blockquote>
                             <p id="desc_modal">desc</p>
-
                         </div>
 
                     </div>
 
                 </div>
                 <div class="modal-footer">
+
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="veterinaireMap.php?lat=" id="btn_map_modal" class="btn btn-info">voir sur map</a>
                 </div>
             </div>
         </div>
@@ -336,13 +301,28 @@ session_start();
 
 
     <script>
-        function displayModal(nom, prenom, urlImage, city, address, desc) {
+        function displayModal(nom, prenom, urlImage, city, address, desc, lat, lng) {
             $('#name_modal').html(nom + " " + prenom);
             $('#address_modal').html(city + " - " + address);
             $('#desc_modal').html(desc);
             $('#img_modal').attr("src", urlImage);
+            $('#btn_map_modal').attr("href", "veterinaireMap.php?lat=" + lat + "&lng=" + lng);
             $('#btn_modal').click();
         }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#search_input_vet").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#veterinaire_container #veterinaire_content").filter(function() {
+
+                    var isMatch = $(this).text().toLowerCase().indexOf(value) > -1;
+                    //alert(isMatch);
+                    $(this).toggle(isMatch)
+                });
+            });
+        });
     </script>
 </body>
 
